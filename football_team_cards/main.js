@@ -49,7 +49,7 @@ const footballTeam = {
             isCaptain: false,
         },
         {
-            name: "(Captain) Diego Maradona",
+            name: "Diego Maradona",
             position: "midfielder",
             isCaptain: true,
         },
@@ -117,13 +117,13 @@ const footballTeam = {
 }
 
 const headCoach = document.getElementById("head-coach");
-headCoach.innerText = footballTeam.headCoach;
+headCoach.textContent = footballTeam.headCoach;
 
 const team = document.getElementById("team");
-team.innerText = footballTeam.team;
+team.textContent = footballTeam.team;
 
 const year = document.getElementById("year");
-year.innerText = footballTeam.year;
+year.textContent = footballTeam.year;
 
 const playerCards = document.getElementById("player-cards");
 const selectPlayers = document.getElementById("players");
@@ -131,30 +131,37 @@ const selectPlayers = document.getElementById("players");
 function renderPlayers () {
     playerCards.innerHTML = "";
 
-    const selected = selectPlayers.value.toLowerCase();
+    if (selectPlayers.value === "all") {
 
-    for (const player of footballTeam.players) {
-        const position = player.position.toLowerCase();
-
-        if(selected === "all" || selected === position) {
-            const playerCard = document.createElement("div");
-            playerCard.classList.add("player-card");
-
-            let playerName = document.createElement("h2");
-            playerName.innerText = player.name;
-
-            let playerPosition = document.createElement("p");
-            playerPosition.innerText = `Position: ${player.position}`;
-
-            playerCard.append(playerName, playerPosition);
-            playerCards.appendChild(playerCard);
-        }
+        footballTeam.players.forEach(player => {
+            createPlayerCard(player);
+        })
+        return;
     }
+
+    footballTeam.players.forEach(player => {
+        if(player.position === selectPlayers.value) {
+            createPlayerCard(player);
+        }
+    })
+}
+function createPlayerCard(player) {
+    const playerCard = document.createElement("div");
+    playerCard.classList.add("player-card");
+
+    const playerName = document.createElement("h2");
+    playerName.textContent = player.isCaptain ? `(Captain) ${player.name}` : player.name;
+
+    const playerPosition = document.createElement("p");
+    playerPosition.textContent = `Position: ${player.position}`;
+
+    playerCard.append(playerName, playerPosition);
+    playerCards.appendChild(playerCard);
 }
 
 renderPlayers();
 selectPlayers.addEventListener("change", renderPlayers);
-
+selectPlayers.addEventListener("input", renderPlayers);
 
 
 
