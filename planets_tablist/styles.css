@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.tabs {
+    width: 100%;
+    height: 100vh;
+    padding-left: 20px;
+    background-image:url("./images/pexels-sharonmanueljoy-20446121.jpg");
+    background-position: center;
+}
+#tabs-title {
+    color: white;
+    padding-top: 30px;
+    font-size: 40px;
+}
+.tabs [role="tablist"] {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+[role="tab"] {
+    padding: 0.5rem 1rem;
+    background: #eee ;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-weight: bold;
+}
+[role="tab"][aria-selected="true"] {
+    background: #fff;
+    border-bottom: 3px solid dodgerblue;
+}
+[role="tabpanel"] {
+    background: rgba(240, 253, 255, 0.82);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-right: 20px;
+}
